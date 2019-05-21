@@ -1,0 +1,15 @@
+{
+  "name": "buddha-code/buco-order-documents-api",
+  "homepage": "https://github.com/buddhaCode/BucoOrderDocumentsApi",
+  "description": "Shopware plugin which adds a REST API endpoint to access and delete order documents",
+  "keywords": ["shopware", "plugin", "rest", "api", "order document"],
+  "type": "shopware-plugin",
+  "extra": {
+    "installer-name": "BucoOrderDocumentsApi"
+  },
+  "license": "GPL-3.0",
+  "require": {
+    "php": ">=7.0",
+    "composer/installers": "^1.0"
+  }
+}

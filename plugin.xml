@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../engine/Shopware/Components/Plugin/schema/plugin.xsd">
+    <label>Orders: Documents API</label>
+    <label lang="de">Bestellungen: Dokumente API</label>
+    <version>1.0.0</version>
+    <license>MIT</license>
+    <link>https://github.com/buddhaCode/BucoOrderDocumentsApi</link>
+    <author>buddhaCode</author>
+    <description>
+        <![CDATA[
+            <p>This plugin adds a new REST API endpoint to access and delete the order documents including their attributes. Creating and modifying
+             order documents it currently not implemented. The access to the endpoint can be restricted with the access
+             control list (ACL) resource <code>BucoOrderDocuments</code> and the privileges <code>read</code> and
+             <code>delete</code> in the user manager.</p>
+
+             <p>The REST API can be accessed in the following ways:</p>
+
+             <ul>
+                <li>
+                    <p><code>GET /api/BucoOrderDocuments/</code> returns a <b>listing</b>. The <a href="https://developers.shopware.com/developers-guide/rest-api/#filter,-sort,-limit,-offset">well known</a> limit, order and query parameters can be applied.</p>
+                    <p>Example output:<br><code>
+<pre>{
+    "data": [
+        {
+            "id": 11756,
+            "date": "2017-07-31T00:00:00+0200",
+            "typeId": 1,
+            "customerId": 6,
+            "orderId": 1,
+            "amount": 1598,
+            "documentId": "55483",
+            "hash": "7d2431092sadsa3a8047756edf0fec2da",
+            "attribute": { // null, if no attributes available
+                "id": 11668,
+                "documentId": 11756,
+                "someExampleAttribute": 42,
+            }
+        },
+        { ... }
+    ],
+    "total": 1337,
+    "success": true
+}</pre></code></p>
+                </li>
+                <li>
+                    <p><code>GET /api/BucoOrderDocuments/{id}</code> returns a <b>specific</b> order document with a base64 encoded representation of the PDF document directly within the JSON response. To retrieve the PDF document directly without the meta data, include or set the MIME type <code>application/pdf</code> in the request header <code>Accept</code>.</p>
+                    <p>Example output (for JSON representation):<br><code>
+<pre>{
+    "data": {
+        "id": 11756,
+        "date": "2017-07-31T00:00:00+0200",
+        "typeId": 1,
+        "customerId": 6,
+        "orderId": 1,
+        "amount": 1598,
+        "documentId": "55483",
+        "hash": "7d2431092sadsa3a8047756edf0fec2da",
+        "attribute": { // null, if no attributes available
+            "id": 11668,
+            "documentId": 11756,
+            "someExampleAttribute": 42,
+        },
+        "pdfDocument": "some random base64 encoded data[...]" // null, if file do not exist
+    },
+    "success": true
+}</pre></code></p>
+                </li>
+                <li>
+                    <p><code>DELETE /api/BucoOrderDocuments/{id}</code> deletes a <b>specific</b> order document.</p>
+                    <p>Example output:<br><code>
+<pre>{
+    "success": true
+}</pre></code></p>
+                </li>
+             </ul>
+        ]]>
+    </description>
+    <compatibility minVersion="5.2.0" />
+    <changelog version="1.0.0">
+        <changes>Initial Release</changes>
+        <changes lang="de">Erstveröffentlichung</changes>
+    </changelog>
+</plugin>
